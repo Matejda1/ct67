@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zpráva - ČT67</title>
+    <title>Krize v Hormuzském průlivu</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -36,8 +36,6 @@
             /* Ostatní systémové barvy */
             --ct-blue-accent: #05668D;
             /* Doplňková modrá pro odkazy */
-            --ct-live-red: #00A896;
-            /* Indikátor (tyrkysový místo červené) */
             --ct-shadow: rgba(27, 42, 50, 0.08);
             /* Jemný stín karet */
 
@@ -58,6 +56,7 @@
             color: var(--ct-dark);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         /* Top Utility Bar */
@@ -71,10 +70,15 @@
             align-items: center;
         }
 
+        .top-bar-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
         .top-bar-links a {
             color: #d1d5db;
             text-decoration: none;
-            margin-right: 15px;
             transition: color 0.2s;
         }
 
@@ -82,7 +86,7 @@
             color: var(--ct-white);
         }
 
-        /* Main CT Header */
+        /* Main Header */
         .main-header {
             background-color: var(--ct-dark);
             color: var(--ct-white);
@@ -102,10 +106,16 @@
             height: 60px;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             text-decoration: none;
             color: var(--ct-white);
         }
@@ -142,12 +152,19 @@
             padding: 18px 0;
             border-bottom: 3px solid transparent;
             transition: all 0.2s;
+            display: inline-block;
         }
 
         .nav-links a:hover,
         .nav-links a.active {
             border-bottom-color: var(--ct-red);
             color: #ffffff;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .live-btn {
@@ -164,6 +181,7 @@
             cursor: pointer;
             text-transform: uppercase;
             transition: background 0.2s;
+            white-space: nowrap;
         }
 
         .live-btn:hover {
@@ -177,6 +195,16 @@
             border-radius: 50%;
             display: inline-block;
             animation: pulse 1.5s infinite;
+        }
+
+        /* Mobile Hamburger Button */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--ct-white);
+            cursor: pointer;
+            padding: 5px;
         }
 
         @keyframes pulse {
@@ -230,15 +258,15 @@
         /* Article Typography */
         .article-title {
             font-family: 'Roboto Slab', Georgia, serif;
-            font-size: 2.5rem;
-            line-height: 1.2;
+            font-size: Clamp(1.6rem, 4vw, 2.5rem);
+            line-height: 1.25;
             font-weight: 700;
             color: var(--ct-dark);
             margin-bottom: 16px;
         }
 
         .article-perex {
-            font-size: 1.25rem;
+            font-size: Clamp(1.05rem, 2vw, 1.25rem);
             line-height: 1.5;
             font-weight: 600;
             color: var(--ct-dark);
@@ -252,6 +280,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
             padding: 12px 0;
             border-top: 1px solid var(--ct-gray-border);
             border-bottom: 1px solid var(--ct-gray-border);
@@ -277,6 +307,7 @@
             justify-content: center;
             font-weight: bold;
             font-size: 0.9rem;
+            flex-shrink: 0;
         }
 
         .author-name {
@@ -286,8 +317,9 @@
 
         .article-toolbar {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .tool-btn {
@@ -313,6 +345,7 @@
         /* Main Image Styling */
         .main-media {
             margin-bottom: 30px;
+            width: 100%;
         }
 
         .main-media img {
@@ -331,6 +364,8 @@
             padding: 0 4px;
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .media-author {
@@ -343,6 +378,7 @@
             line-height: var(--article-line-height);
             color: #2c3e50;
             transition: font-size 0.2s ease;
+            word-wrap: break-word;
         }
 
         .article-content p {
@@ -351,7 +387,7 @@
 
         .article-content h2 {
             font-family: 'Roboto Slab', Georgia, serif;
-            font-size: 1.6rem;
+            font-size: Clamp(1.3rem, 3vw, 1.6rem);
             color: var(--ct-dark);
             margin: 35px 0 15px 0;
             padding-bottom: 6px;
@@ -367,14 +403,6 @@
             font-weight: 600;
             color: var(--ct-dark);
             border-radius: 0 4px 4px 0;
-        }
-
-        .article-content ul {
-            margin: 0 0 20px 24px;
-        }
-
-        .article-content li {
-            margin-bottom: 8px;
         }
 
         /* Sidebar Styling */
@@ -502,7 +530,7 @@
             margin: 0 auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 30px;
             margin-bottom: 30px;
         }
@@ -549,7 +577,7 @@
             color: var(--ct-white);
             padding: 12px 20px;
             border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -558,6 +586,7 @@
             transition: all 0.3s ease;
             z-index: 1000;
             border-left: 4px solid var(--ct-red);
+            max-width: calc(100vw - 40px);
         }
 
         .toast.show {
@@ -565,18 +594,81 @@
             opacity: 1;
         }
 
-        /* Responsive design */
-        @media (max-width: 900px) {
+        /* MEDIA QUERIES - RESPONZIVITA */
+        @media (max-width: 992px) {
             .page-container {
                 grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
             }
 
-            .article-title {
-                font-size: 1.8rem;
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: var(--ct-dark);
+                border-bottom: 3px solid var(--ct-red);
+                padding: 10px 20px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .main-nav.active {
+                display: block;
             }
 
             .nav-links {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .nav-links a {
+                padding: 12px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                display: block;
+            }
+
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+
+            .top-bar-links a:not(:first-child):not(:nth-child(4)) {
                 display: none;
+            }
+
+            .page-container {
+                margin: 15px auto;
+                padding: 0 15px;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .article-toolbar {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .live-text {
+                display: none;
+            }
+
+            .live-btn {
+                padding: 6px 10px;
+            }
+
+            .header-container {
+                padding: 0 12px;
             }
         }
     </style>
@@ -602,26 +694,35 @@
     <!-- Hlavní hlavička ČT24 -->
     <header class="main-header">
         <div class="header-container">
-            <a href="#" class="logo-container">
-                <span class="logo-ct">ČT</span>
-                <span class="logo-text">67</span>
-            </a>
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle" aria-label="Otevřít menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12h18M3 6h18M3 18h18" />
+                    </svg>
+                </button>
+                <a href="#" class="logo-container">
+                    <span class="logo-ct">ČT</span>
+                    <span class="logo-text">67</span>
+                </a>
+            </div>
 
-            <nav>
+            <nav class="main-nav" id="mainNav">
                 <ul class="nav-links">
-                    <li><a href="#" class="active">Domácí</a></li>
-                    <li><a href="#">Radlické</a></li>
+                    <li><a href="#">Smíchovské</a></li>
+                    <li><a href="#" class="active">Radlické</a></li>
                     <li><a href="#">Kybernetické</a></li>
-                    <li><a href="#">Věda a technika</a></li>
+                    <li><a href="#">Krytové v Radlicích</a></li>
                     <li><a href="#">Kultura</a></li>
                     <li><a href="#">Regiony</a></li>
                 </ul>
             </nav>
 
-            <button class="live-btn" onclick="alert('Spouštění živého vysílání ČT67...');">
-                <span class="live-dot"></span>
-                Živé vysílání
-            </button>
+            <div class="header-actions">
+                <button class="live-btn" onclick="alert('Spouštění živého vysílání ČT67...');">
+                    <span class="live-dot"></span>
+                    <span class="live-text">Živé vysílání</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -632,31 +733,30 @@
         <main class="article-main">
 
             <div class="article-category">
-                <!-- UPRAVIT: KATEGORIE -->
                 Cestovaní & Dějepis
             </div>
 
-            <!-- UPRAVIT: HLAVNÍ TITULEK ČLÁNKU -->
+            <!-- HLAVNÍ TITULEK ČLÁNKU -->
             <h1 class="article-title" id="articleTitle">
                 ROPA V OHROŽENÍ?! Hormuzský průliv pod tlakem
             </h1>
 
-            <!-- UPRAVIT: PEREX (ÚVODNÍ TEXT) -->
+            <!-- PEREX (ÚVODNÍ TEXT) -->
             <p class="article-perex" id="articlePerex">
                 Hrozba min, raketových útoků a ceny ropy vystřelují k rekordním hodnotám. Klíčová tepna, kterou dříve
                 proudila pětina světových zásob ropy a plynu, nyní paralyzuje globální trhy. Poté, co Íránské gardy
                 uzavřely tuto strategickou cestu, začaly vyhrožovat útoky na nezúčastněná i izraelská plavidla a se svět
                 ocitá na hraně paniky a cenové krize.
-                
-                <!-- Metainformace o článku a lišta nástrojů -->
+            </p>
+
+            <!-- Metainformace o článku a lišta nástrojů -->
             <div class="article-meta">
                 <div class="author-info">
                     <div class="author-avatar">ČT</div>
                     <div>
-                        <!-- UPRAVIT: AUTOR A DATUM -->
                         <div class="author-name">Redakce ČT67, ČTK</div>
                         <div>Matějka, Albert, Slapnička, Štraserová, Heřmanský</div>
-                        <div>Publikováno před 2 hodinami • Aktualizováno</div>
+                        <div>Publikováno před 1 hodinou • Aktualizováno</div>
                     </div>
                 </div>
 
@@ -683,53 +783,51 @@
             </div>
 
             <!-- JEDINÁ FOTOGRAFIE V ČLÁNKU -->
-            <!-- UPRAVIT: ZDE ZMĚŇ URL ADRESU OBRÁZKU A POPISKY -->
             <figure class="main-media">
-                <img id="articleImage" src="./pohonne_hmoty_cr_graf.png" alt="Studenti SSPS pracují na projektu">
+                <img id="articleImage" src="./pohonne_hmoty_cr_graf.png" alt="Hormuzský průliv a ropné tankery">
                 <figcaption class="media-caption">
                     <span id="imageCaption">Vývoj cen pohonných hmot v ČR.</span>
-                    <span class="media-author">Foto: ČT67 / Archiv SSPS</span>
+                    <span class="media-author">Foto: ČT67 / Ředitel</span>
                 </figcaption>
             </figure>
 
-            <!-- UPRAVIT: SAMOTNÝ TEXT ČLÁNKU -->
+            <!-- SAMOTNÝ TEXT ČLÁNKU -->
             <article class="article-content" id="articleBody">
                 <p>
-                    Pražská Smíchovská střední průmyslová škola dlouhodobě patří mezi přední vzdělávací instituce
-                    zaměřené na informační technologie a kybernetickou bezpečnost. Nový program dává studentům možnost
-                    vyzkoušet si práci v reálných vývojových týmech ještě před dokončením maturity.
+                    Krize v Hormuzském průlivu je jeden z největších geopolitických konfliktů vůbec. Má rozsáhlý dopad
+                    na ceny ropy a energetických zdrojů. Hormuzský průliv leží mezi Íránem a ománem a tato úzká dopravní
+                    cesta je jedna z nejdůležitějších vůbec.
                 </p>
 
-                <h2>Důraz na praxi a nové technologie</h2>
-
                 <p>
-                    Cílem tohoto programu je překlenout mezeru mezi teoretickou výukou ve školách a reálnými požadavky
-                    trhu práce. Studenti pracují s moderními technologiemi, jako je vývoj webových aplikací, cloudová
-                    řešení či umělá inteligence.
+                    Dříve skrze ní proudilo až 1/5 celosvětové ropy a zkapalněného zemního plynu takže tento konflikt
+                    afektuje všechny země. Provoz lodí v oblasti se kvůli uzavření také silně propadnul.
                 </p>
 
-                <blockquote>
-                    „Chceme studentům ukázat, jak probíhá vývoj reálných aplikací v praxi. Spolupráce na odborných
-                    projektech jim dává obrovský náskok při vstupu na vysokou školu i do zaměstnání.“
-                </blockquote>
-
                 <p>
-                    Kromě technických dovedností se výuka zaměřuje také na měkké dovednosti (soft skills), mezi které
-                    patří týmová komunikace, práce s verzovacími systémy (jako např. Git) a prezentování výsledků před
-                    zákazníky.
+                    Proplouvající lodě mohou narazit na miny, či mohou být zneškodněny jinými prostředky. Toto
+                    vyvolává paniku kvůli nedostatku ropy.
                 </p>
 
-                <h2>Jaké technologie studenti využívají:</h2>
-                <ul>
-                    <li>Moderní webový vývoj (HTML5, CSS3, JavaScript/TypeScript, React)</li>
-                    <li>Backendové architektury a databázové systémy</li>
-                    <li>Kybernetická bezpečnost a správa sítí</li>
-                    <li>Návrh uživatelského rozhraní (UI/UX)</li>
-                </ul>
+                <p>
+                    Cena ropy Brent se za jeden týden kvůli panice dočasně téměř zdvojnásobila a vystoupala až na 130
+                    USD za jeden barel oproti předchozí ceně 100 USD na barel.
+                </p>
 
                 <p>
-                    Projekt se setkal s pozitivním ohlasem jak mezi pedagogy, tak samotnými studenty, kteří oceňují
-                    především vysokou míru samostatnosti a možnost pracovat na smysluplných úkolech.
+                    Íránské revoluční gardy (IRGC) tvrdí, že průliv mají kompletně pod kontrolou. V červenci uvedli, že
+                    průliv zůstane uzavřený dokud USA naustane s vojenskými zásahy.
+                </p>
+
+                <p>
+                    Následně varovaly lodě o nebezpečí průjezdu bez kooperace s Íránem. V září jejich tvrzení znova
+                    přednesli, přes to že nekooperující lodě nadále občas proplouvají.
+                </p>
+
+                <p>
+                    Írán nadále vyhlásil absolutní zákaz průjezdu všem izraelským lodím nebo afiliovaným s ní. Tvrdí že
+                    budou bez varování lodě jinak napadat. Iránská vláda toto nadále potvrdila a varovala lodě plující
+                    pod izraelskou vlajkou.
                 </p>
             </article>
 
@@ -741,7 +839,7 @@
             <!-- Widget: Živé vysílání -->
             <div class="widget widget-live">
                 <div class="widget-title">
-                    <span>Živě ČT67</span>
+                    <span>Živě ČT674</span>
                     <span
                         style="font-size: 0.75rem; background: var(--ct-red); padding: 2px 6px; border-radius: 2px;">LIVE</span>
                 </div>
@@ -762,12 +860,10 @@
                 </div>
                 <ol class="most-read-list">
                     <li class="most-read-item">
-                        <a href="#" class="most-read-link">Napětí v Tchajwanském průlivu (Incident kolem ostrovů
-                            Kinmen)</a>
+                        <a href="#" class="most-read-link">Napětí v Tchajwanském průlivu (Incident kolem ostrovů Kinmen)</a>
                     </li>
                     <li class="most-read-item">
-                        <a href="#" class="most-read-link">Narušení dopravy v Rudém moři a průlivu Báb al-Mandab
-                            (Hútíové)</a>
+                        <a href="#" class="most-read-link">Narušení dopravy v Rudém moři a průlivu Báb al-Mandab (Hútíové)</a>
                     </li>
                     <li class="most-read-item">
                         <a href="#" class="most-read-link">Zajištění elektrárny v Záporoží</a>
@@ -784,7 +880,7 @@
                     Téma ČT67
                 </div>
                 <p style="font-size: 0.85rem; color: var(--ct-gray-text); margin-bottom: 10px;">
-                    Sledujte přehledný souhrn zpráv zaměřených na vzdělávání a moderní technologie v ČR.
+                    Sledujte přehledný souhrn zpráv zaměřených na energetickou krizi a konflikty na Blízkém východě.
                 </p>
                 <a href="#" style="color: var(--ct-red); font-weight: 700; font-size: 0.85rem; text-decoration: none;">
                     Všechny zprávy z tématu →
@@ -801,14 +897,14 @@
             <div class="footer-col">
                 <h4>Zpravodajství</h4>
                 <ul>
-                    <li><a href="#">Domácí</a></li>
-                    <li><a href="#">Zahraničí</a></li>
-                    <li><a href="#">Ekonomika</a></li>
-                    <li><a href="#">Věda a technika</a></li>
+                    <li><a href="#">Smíchovské</a></li>
+                    <li><a href="#">Radlické</a></li>
+                    <li><a href="#">Kybernetické</a></li>
+                    <li><a href="#">Krytové v Radlicích</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Pořady Č67</h4>
+                <h4>Pořady ČT67</h4>
                 <ul>
                     <li><a href="#">Události</a></li>
                     <li><a href="#">Interview ČT67</a></li>
@@ -851,6 +947,14 @@
 
     <!-- JavaScript kód -->
     <script>
+        // Mobilní menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
         // Nastavení velikosti písma
         let currentFontSize = 1.125; // rem
         const articleBody = document.getElementById('articleBody');
